@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Installer le deck — CMULTIMEDIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-152.png">
+<link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div style="position:absolute;left:0;right:0;top:0;bottom:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:24px 40px;-webkit-user-select:text">
+<h1 style="font-weight:300">CMULTIMEDIA Deck — installation sur l'iPad</h1>
+<p class="sub">Tout reste sur ton réseau local. Aucun port n'est ouvert sur la box.</p>
+<h2>Le plus simple : tout installer d'un coup</h2>
+<p><a class="b go" href="/deck.mobileconfig">Installer le profil Deck (certificat + icône)</a></p>
+<p class="sub">Touche Installer (code de l'iPad), Installer, OK. L'icône « Deck » apparaît sur l'écran d'accueil : ouvre-la et saisis le code d'association. Les étapes 1 à 3 ci-dessous ne servent alors plus.</p>
+<h2>1. Installer le certificat du deck (une seule fois)</h2>
+<p>Le Mac chiffre les échanges (micro, photos, clavier, souris) avec son propre certificat. Pour que l'iPad lui fasse confiance :</p>
+<p><a class="b go" href="/ca.crt">Télécharger le certificat du deck</a></p>
+<p>Safari propose « Installer le profil » : touche <b>Installer</b> (code de l'iPad), puis <b>Installer</b> encore et <b>OK</b>. Sur iOS 9, aucune autre activation n'est nécessaire.</p>
+<p class="sub">Empreinte SHA-256 à comparer avec celle affichée par <b>./deck doctor</b> sur le Mac : <span id="fp">voir ./deck doctor</span></p>
+<h2>2. Ouvrir le deck en https</h2>
+<p><a class="b go" id="go-https" href="#">Ouvrir le deck chiffré</a> <span class="sub" id="https-url"></span></p>
+<h2>3. Ajouter l'icône à l'écran d'accueil</h2>
+<p>Dans Safari, sur la page https du deck : bouton <b>Partager</b> (carré avec flèche) puis <b>Sur l'écran d'accueil</b>, nom « Deck ». Ouvre ensuite le deck <b>depuis l'icône</b> et saisis le code d'association affiché sur le Mac. L'icône s'affiche en plein écran, sans barre Safari.</p>
+<h2>Si la connexion chiffrée échoue</h2>
+<p>Le deck ne fonctionne qu'en https : l'association et les commandes ne circulent jamais en clair sur le Wi-Fi. Vérifie que le certificat est installé (et, sur iOS 10.3 ou plus récent, activé dans Réglages › Général › Informations › Réglages des certificats), puis rouvre l'adresse https. Ne saisis le code d'association que sur une page avec le cadenas.</p>
+</div>
+<script src="/setup.js"></script>
+</body>
+</html>

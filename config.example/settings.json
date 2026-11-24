@@ -1,0 +1,14 @@
+{
+  "portHttp": 8710,
+  "portHttps": 8711,
+  "accent": "#00C4D9",
+  "animations": "normal",
+  "metricsIntervalSec": 5,
+  "httpIntervalSec": 60,
+  "historyMinutes": 60,
+  "maxCaptureSec": 120,
+  "disconnectGraceSec": 20,
+  "previewFps": 2,
+  "previewWidth": 480,
+  "demo": false
+}

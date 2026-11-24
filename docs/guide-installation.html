@@ -1,0 +1,291 @@
+<title>CMULTIMEDIA Deck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Mise en page : une colonne de lecture, une maquette de tablette en ouverture, puis le guide en étapes réelles */
+:root {
+  --bg: #f3f6fb; --surface: #ffffff; --ink: #0a1f44; --muted: #4a5b7a; --line: #d6dfec;
+  --accent: #008ea0; --pink: #d6337a; --code-bg: #0a1f44; --code-ink: #dff8fb;
+  --ok: #1d8a52; --warn: #b26a00; --ko: #c0304a;
+  --tab-bg: #0a1f44; --tab-tile: #12305f; --tab-ink: #e8eef8;
+  --f-display: "Chakra Petch", "Avenir Next", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #06122a; --surface: #0c1d3e; --ink: #e8eef8; --muted: #9fb3d1; --line: #1f3766;
+  --accent: #00c4d9; --pink: #ff4f9a; --code-bg: #020a1a; --code-ink: #c9f6fb;
+  --ok: #5fd99a; --warn: #ffc163; --ko: #ff7d94;
+  --tab-bg: #020a1a; --tab-tile: #12305f; --tab-ink: #e8eef8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #06122a; --surface: #0c1d3e; --ink: #e8eef8; --muted: #9fb3d1; --line: #1f3766;
+  --accent: #00c4d9; --pink: #ff4f9a; --code-bg: #020a1a; --code-ink: #c9f6fb;
+  --ok: #5fd99a; --warn: #ffc163; --ko: #ff7d94;
+  --tab-bg: #020a1a; --tab-tile: #12305f; --tab-ink: #e8eef8; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: .02em; }
+h2 { font-size: 1.6rem; margin-bottom: 14px; }
+h3 { font-size: 1.1rem; margin-bottom: 6px; }
+p { margin: 0 0 12px; max-width: 65ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; border-radius: 4px; }
+.eyebrow { font-family: var(--f-mono); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+.lead { font-size: 1.15rem; color: var(--muted); }
+section { margin-top: 56px; }
+
+/* Ouverture : texte + maquette de tablette */
+.hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 36px; align-items: center; }
+.hero > div { min-width: 0; }
+.tablet { background: var(--tab-bg); border-radius: 26px; padding: 18px; box-shadow: 0 18px 50px rgba(10, 31, 68, .25); max-width: 100%; }
+.screen { border-radius: 10px; overflow: hidden; background: linear-gradient(160deg, #0d1f45, #2a0e4a); padding: 10px; color: var(--tab-ink); font-family: var(--f-mono); }
+.bar { display: flex; justify-content: space-between; align-items: center; font-size: .7rem; padding: 2px 4px 8px; }
+.bar b { font-size: 1.1rem; color: #00f0ff; letter-spacing: .08em; }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.tile { background: rgba(18, 48, 95, .85); border: 1px solid rgba(0, 196, 217, .45); border-radius: 8px; padding: 6px; min-height: 58px; }
+.tile small { display: block; font-size: .55rem; letter-spacing: .1em; color: #8fe9f3; text-transform: uppercase; }
+.tile strong { font-size: 1.15rem; color: #7de3a8; }
+.tile.wide { grid-column: span 2; }
+.spec { display: flex; align-items: flex-end; gap: 2px; height: 30px; margin-top: 4px; }
+.spec i { flex: 1; background: linear-gradient(#ff2a8a, #00f0ff); border-radius: 1px; }
+.keys { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-top: 6px; }
+.keys span { font-size: .5rem; text-align: center; padding: 7px 2px; border: 1px solid rgba(0, 240, 255, .5); border-radius: 6px; background: rgba(4, 14, 34, .6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.caption { font-size: .8rem; color: var(--muted); text-align: center; margin-top: 10px; }
+
+/* Ce que fait le Deck */
+.feat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 28px; }
+.feat div { min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; }
+.feat p { font-size: .95rem; color: var(--muted); }
+
+/* Tableau de compatibilité */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .95rem; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+.pill { display: inline-block; font-family: var(--f-mono); font-size: .75rem; font-weight: 600; padding: 2px 9px; border-radius: 99px; border: 1.5px solid currentColor; white-space: nowrap; }
+.p-ok { color: var(--ok); } .p-warn { color: var(--warn); } .p-ko { color: var(--ko); } .p-unk { color: var(--muted); }
+
+/* Prérequis */
+.needs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; padding: 0; margin: 0; list-style: none; }
+.needs li { min-width: 0; padding-left: 18px; position: relative; }
+.needs li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+.needs .opt::before { background: transparent; border: 1.5px solid var(--accent); }
+
+/* Étapes d'installation : une vraie séquence, d'où la numérotation */
+.steps { counter-reset: s; display: grid; gap: 22px; padding: 0; margin: 0; list-style: none; }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 16px; }
+.steps > li::before { content: counter(s); font-family: var(--f-display); font-weight: 700; font-size: 1.3rem; color: var(--accent); border: 2px solid var(--accent); border-radius: 50%; width: 40px; height: 40px; display: grid; place-items: center; }
+.steps > li > div { min-width: 0; }
+.steps p { color: var(--muted); }
+.code { position: relative; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px; padding-right: 92px; font-family: var(--f-mono); font-size: .88rem; overflow-x: auto; white-space: pre; margin: 6px 0 4px; }
+.copy { position: absolute; top: 8px; right: 8px; font-family: var(--f-mono); font-size: .72rem; background: transparent; color: var(--code-ink); border: 1px solid rgba(201, 246, 251, .5); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.copy:hover { border-color: var(--code-ink); }
+code { font-family: var(--f-mono); font-size: .9em; background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 1px 5px; border-radius: 4px; }
+.note { border-left: 3px solid var(--pink); padding: 10px 14px; background: var(--surface); border-radius: 0 8px 8px 0; font-size: .95rem; max-width: 70ch; }
+
+/* Questions fréquentes */
+details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+summary { cursor: pointer; font-weight: 600; }
+details p { margin-top: 8px; color: var(--muted); }
+
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 760px) {
+  .hero, .feat, .needs { grid-template-columns: 1fr; }
+  .steps > li { grid-template-columns: 34px 1fr; gap: 12px; }
+  .steps > li::before { width: 32px; height: 32px; font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spec i { animation: pulse 1.6s ease-in-out infinite alternate; transform-origin: bottom; }
+  .spec i:nth-child(3n) { animation-duration: 1.1s; } .spec i:nth-child(4n+1) { animation-duration: 1.9s; }
+  @keyframes pulse { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Guide d'installation · macOS + tablette</div>
+      <h1>CMULTIMEDIA Deck</h1>
+      <p class="lead">Transformez une tablette, même un vieil iPad, en pupitre tactile pour votre Mac : musique, raccourcis, trackpad, clavier, surveillance de vos sites et état de la machine, d'un seul toucher.</p>
+      <p>Le Mac fait tout le travail. La tablette affiche seulement l'interface, dans Safari. Rien à acheter, aucun compte à créer, et vos données restent sur votre Mac.</p>
+    </div>
+    <div>
+      <div class="tablet" role="img" aria-label="Maquette de l'écran d'accueil du Deck sur une tablette, avec des tuiles et des touches">
+        <div class="screen">
+          <div class="bar"><span>☰ PAGES</span><b>09:41</b><span>● Mac connecté</span></div>
+          <div class="tiles">
+            <div class="tile"><small>Sites</small><strong>12/12</strong></div>
+            <div class="tile"><small>Processeur</small><strong>18 %</strong></div>
+            <div class="tile"><small>Mémoire</small><strong>9,4 Go</strong></div>
+            <div class="tile"><small>Alertes</small><strong>0</strong></div>
+            <div class="tile wide"><small>Musique</small><div class="spec"><i style="height:40%"></i><i style="height:85%"></i><i style="height:60%"></i><i style="height:95%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:30%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:35%"></i><i style="height:65%"></i><i style="height:25%"></i></div></div>
+            <div class="tile wide"><small>Volume</small><strong>− 45 % +</strong></div>
+          </div>
+          <div class="keys"><span>Trackpad</span><span>Clavier</span><span>Emojis</span><span>Applis</span><span>Musique</span><span>Outils</span></div>
+        </div>
+      </div>
+      <div class="caption">Maquette d'illustration, valeurs d'exemple</div>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Ce que fait le Deck</div>
+    <h2>Un tableau de bord qu'on touche</h2>
+    <div class="feat">
+      <div><h3>Piloter le Mac</h3><p>Trackpad au doigt, clavier virtuel avec raccourcis (système, applications, navigateur), clavier d'emojis, ouverture des applications avec leurs vraies icônes, volume.</p></div>
+      <div><h3>Musique</h3><p>Pochette, lecture, boucle, aléatoire, playlists et favoris (station, artiste), avec une animation qui suit le son réellement joué par le Mac. Cinq visualisations au choix.</p></div>
+      <div><h3>Surveiller</h3><p>Processeur, mémoire et disque du Mac en courbes. Vos sites testés en continu, avec une alerte à l'écran dès qu'un service tombe.</p></div>
+      <div><h3>Pages sur mesure</h3><p>Un éditeur visuel, sur le Mac, pour composer vos pages, vos touches et leurs actions sur une grille de 12 × 8.</p></div>
+      <div><h3>Studio</h3><p>Photo et voix depuis la tablette, et en option le micro et la caméra du Mac, avec arrêt d'un seul bouton.</p></div>
+      <div><h3>Pensé pour durer</h3><p>Écrit pour fonctionner sur Safari iOS 9 : un iPad 2 de 2011 retrouve une vraie utilité, avec un mode allégé automatique.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Compatibilité</div>
+    <h2>Quelle tablette, quel téléphone ?</h2>
+    <p>Le Deck est dessiné pour une tablette tenue à l'horizontale. Voici ce qui a été vérifié, et comment.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Appareil</th><th>Verdict</th><th>Détail</th></tr></thead>
+        <tbody>
+          <tr><td>iPad sous iOS 9 ou plus récent (iPad 2, 3, 4, mini)</td><td><span class="pill p-ok">Oui</span></td><td>Essayé en conditions réelles sur un iPad 2 sous iOS 9.3.5.</td></tr>
+          <tr><td>iPad récent</td><td><span class="pill p-ok">Oui, très probablement</span></td><td>Affichage vérifié en simulation. Pas encore essayé sur un appareil réel.</td></tr>
+          <tr><td>iPhone à l'horizontale</td><td><span class="pill p-warn">Utilisable, à l'étroit</span></td><td>Tout fonctionne, mais des libellés sont coupés.</td></tr>
+          <tr><td>iPhone à la verticale</td><td><span class="pill p-ko">Non</span></td><td>Écran trop étroit pour la grille actuelle.</td></tr>
+          <tr><td>Tablette ou téléphone Android</td><td><span class="pill p-warn">En partie</span></td><td>Les pages s'affichent dans Chrome. Pour le trackpad, le clavier et le Studio, le certificat du Deck doit être installé à la main dans les réglages de sécurité.</td></tr>
+          <tr><td>Premier iPad (iOS 5)</td><td><span class="pill p-unk">Non testé</span></td><td>Aucune garantie.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Avant de commencer</div>
+    <h2>Ce qu'il vous faut</h2>
+    <ul class="needs">
+      <li>Un Mac sous macOS 13 ou plus récent, allumé pendant l'utilisation</li>
+      <li>La tablette et le Mac sur le même réseau Wi-Fi</li>
+      <li>Node.js 18 ou plus récent, gratuit, sur <a href="https://nodejs.org/fr" target="_blank" rel="noopener">nodejs.org</a> (version LTS)</li>
+      <li>Le code du Deck, gratuit et libre (licence MIT), sur <a href="https://github.com/cmultimedia-laura/cmultimedia-deck" target="_blank" rel="noopener">GitHub</a></li>
+      <li class="opt">Facultatif : les outils de développement d'Apple, gratuits, pour le trackpad, les icônes d'applications et l'animation musicale</li>
+      <li class="opt">Facultatif : Claude Code, pour piloter et modifier le Deck en langage courant</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">Installation · environ 15 minutes</div>
+    <h2>Installer le Deck</h2>
+    <ol class="steps">
+      <li><div>
+        <h3>Installer les outils gratuits</h3>
+        <p>Installez Node.js depuis nodejs.org. Puis, pour profiter de toutes les fonctions, ouvrez l'application Terminal et tapez :</p>
+        <div class="code" data-copy>xcode-select --install</div>
+        <p>Une fenêtre d'Apple propose l'installation des outils en ligne de commande : acceptez. Comptez quelques minutes.</p>
+      </div></li>
+      <li><div>
+        <h3>Télécharger et installer</h3>
+        <p>Dans le Terminal :</p>
+        <div class="code" data-copy>cd ~/Documents
+git clone https://github.com/cmultimedia-laura/cmultimedia-deck.git
+cd cmultimedia-deck
+bash install.sh</div>
+        <p>Sans Git, téléchargez le code depuis la page GitHub (bouton « Code », puis « Download ZIP »), décompressez-le dans Documents et lancez <code>bash install.sh</code> dans ce dossier.</p>
+        <p>L'installateur vérifie votre Mac, prépare les dossiers, compile les petits outils natifs et lance les tests. Chaque ligne s'affiche avec ✅ ou ❌. Il ne démarre rien et ne modifie aucun réglage système.</p>
+      </div></li>
+      <li><div>
+        <h3>Démarrer et ouvrir l'association</h3>
+        <div class="code" data-copy>./deck start
+./deck pair
+./deck url</div>
+        <p><code>./deck pair</code> affiche un code à 6 chiffres valable 10 minutes. <code>./deck url</code> donne les adresses à ouvrir sur la tablette et l'empreinte du certificat du Deck.</p>
+      </div></li>
+      <li><div>
+        <h3>Préparer la tablette</h3>
+        <p>Dans Safari, sur la tablette, ouvrez l'adresse <code>http://…:8710/setup</code> donnée par <code>./deck url</code>, puis touchez « Télécharger le certificat du deck » et installez-le.</p>
+        <p>Sur iOS 10.3 et plus récent, activez-le ensuite dans Réglages › Général › Informations › Réglages des certificats. Sur iOS 9, rien de plus à faire.</p>
+        <p>Vérifiez que l'empreinte affichée dans le profil installé (Réglages › Général › Profils) est bien celle donnée par <code>./deck url</code> sur le Mac.</p>
+      </div></li>
+      <li><div>
+        <h3>Ajouter l'icône et associer</h3>
+        <p>Ouvrez l'adresse <code>https://…:8711/</code>, puis Partager › Sur l'écran d'accueil. Ouvrez le Deck depuis cette icône, et tapez le code à 6 chiffres. Ne tapez jamais ce code sur une page sans cadenas : le Deck ne le demande qu'en https.</p>
+        <p>C'est fait : le Deck s'ouvre en plein écran, et l'icône suffit les fois suivantes.</p>
+      </div></li>
+      <li><div>
+        <h3>Autoriser Terminal sur le Mac</h3>
+        <p>Dans Réglages Système › Confidentialité et sécurité, autorisez <strong>Terminal</strong> dans :</p>
+        <p>Accessibilité, pour le trackpad, le clavier et les raccourcis ; Enregistrement de l'écran et de l'audio du système, pour l'animation de la page Musique (seuls 24 niveaux sonores sont calculés, rien n'est enregistré).</p>
+        <p><code>./deck doctor</code> indique ce qui manque encore.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="eyebrow">Au quotidien</div>
+    <h2>Les commandes utiles</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Commande</th><th>Effet</th></tr></thead>
+        <tbody>
+          <tr><td><code>./deck start</code> · <code>./deck stop</code></td><td>Démarrer ou arrêter le Deck. L'arrêt libère aussi le micro et la caméra.</td></tr>
+          <tr><td><code>./deck status</code></td><td>État du serveur et des appareils connectés.</td></tr>
+          <tr><td><code>./deck pair</code></td><td>Associer une nouvelle tablette (code valable 10 minutes).</td></tr>
+          <tr><td><code>./deck devices</code> · <code>./deck revoke nom</code></td><td>Voir les tablettes associées, en retirer une.</td></tr>
+          <tr><td><code>./deck admin</code></td><td>Ouvrir l'éditeur visuel des pages et des touches, sur le Mac.</td></tr>
+          <tr><td><code>./deck reload</code></td><td>Relire la configuration après une modification. La tablette se met à jour seule.</td></tr>
+          <tr><td><code>./deck autostart enable --confirme</code></td><td>Démarrer le Deck automatiquement à l'ouverture de session.</td></tr>
+          <tr><td><code>./deck doctor</code></td><td>Diagnostic complet : outils, certificat, autorisations.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px">L'éditeur s'ouvre avec <code>./deck admin</code>, par un lien valable une seule fois. Il n'est accessible que depuis le Mac lui-même, et protégé par un jeton propre à votre Mac.</p>
+    <p>Réglages utiles dans <code>config/connectors.json</code> : vos sites à surveiller, la ville de la météo, la transcription locale des dictées, et l'affichage facultatif des sessions Claude Code et Codex (désactivé par défaut).</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Sécurité et vie privée</div>
+    <h2>Ce qui reste chez vous</h2>
+    <div class="feat">
+      <div><h3>Tout est local et chiffré</h3><p>Le Deck fonctionne sur votre réseau, sans service en ligne ni compte. Tous les échanges passent en https ; en clair, il ne sert que la page d'installation du certificat.</p></div>
+      <div><h3>Tablettes associées</h3><p>Chaque tablette est associée par un code à usage unique. L'association se ferme toute seule, et cinq codes faux bloquent l'appareil qui essaie.</p></div>
+      <div><h3>Actions prévues</h3><p>Une touche ne déclenche qu'une action prévue à l'avance. Le clavier et le trackpad à distance, eux, permettent tout ce que permettent un vrai clavier et une vraie souris : n'associez que vos appareils.</p></div>
+    </div>
+    <p class="note">Le certificat du Deck est créé sur votre Mac lors du premier démarrage. Ne copiez jamais le dossier <code>data/</code> vers un autre ordinateur : il contient la clé de ce certificat et la liste de vos tablettes.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Dépannage</div>
+    <h2>Questions fréquentes</h2>
+    <details><summary>La tablette affiche une ancienne version de l'interface</summary><p>Le Deck force normalement le rechargement. Fermez l'icône du Deck (double appui sur le bouton principal, puis balayez-la vers le haut) et rouvrez-la.</p></details>
+    <details><summary>« Mac déconnecté » s'affiche en haut de l'écran</summary><p>Vérifiez que le Mac est allumé, que <code>./deck status</code> répond, et que la tablette est sur le même Wi-Fi. Un Mac en veille coupe aussi le Deck.</p></details>
+    <details><summary>Le trackpad ou le clavier ne fait rien sur le Mac</summary><p>Terminal n'a pas l'autorisation Accessibilité. Ajoutez-la dans Réglages Système, puis arrêtez et redémarrez le Deck.</p></details>
+    <details><summary>L'animation de la page Musique reste immobile</summary><p>Autorisez Terminal dans « Enregistrement de l'écran et de l'audio du système ». Sans les outils d'Apple de l'étape 1, l'animation n'est pas disponible.</p></details>
+    <details><summary>La météo n'affiche pas ma ville</summary><p>Réglez la ville et ses coordonnées dans <code>config/connectors.json</code>, section <code>weather</code>, puis lancez <code>./deck reload</code>.</p></details>
+    <details><summary>L'éditeur affiche « Éditeur verrouillé »</summary><p>Ouvrez-le avec <code>./deck admin</code> dans le Terminal du Mac : le lien n'est valable qu'une fois et la session dure 12 heures.</p></details>
+    <details><summary>Le code d'association est refusé</summary><p>Le code ne sert qu'une fois et expire au bout de 10 minutes. Lancez <code>./deck pair</code> pour en obtenir un nouveau, et tapez-le depuis l'icône du Deck, pas depuis Safari.</p></details>
+  </section>
+
+  <footer>
+    <span>CMULTIMEDIA Deck, conçu par CMULTIMEDIA, Aubagne. Logiciel libre, licence MIT, code sur <a href="https://github.com/cmultimedia-laura/cmultimedia-deck" target="_blank" rel="noopener">GitHub</a>.</span>
+    <span><a href="https://www.cmultimedia.com/" target="_blank" rel="noopener">cmultimedia.com</a> · 04 12 12 00 68</span>
+  </footer>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function (box) {
+  var b = document.createElement('button');
+  b.className = 'copy'; b.type = 'button'; b.textContent = 'Copier';
+  b.addEventListener('click', function () {
+    var t = box.firstChild.nodeValue.trim();
+    function done() { b.textContent = 'Copié'; setTimeout(function () { b.textContent = 'Copier'; }, 1600); }
+    function fallback() { var r = document.createRange(); r.selectNodeContents(box.firstChild); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Sélectionné'; }
+    try { navigator.clipboard.writeText(t).then(done, fallback); } catch (e) { fallback(); }
+  });
+  box.appendChild(b);
+});
+</script>

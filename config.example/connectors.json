@@ -1,0 +1,35 @@
+{
+  "monitors": [
+    {
+      "id": "site-1",
+      "label": "Mon site (exemple)",
+      "url": "https://example.com/",
+      "timeoutMs": 10000,
+      "slowMs": 2500,
+      "group": "Mes sites"
+    },
+    {
+      "id": "site-2",
+      "label": "Mon autre site (exemple)",
+      "url": "https://example.org/",
+      "timeoutMs": 10000,
+      "slowMs": 2500,
+      "group": "Mes sites"
+    }
+  ],
+  "weather": {
+    "city": "Paris",
+    "latitude": 48.86,
+    "longitude": 2.35
+  },
+  "transcription": {
+    "engine": "whisper-local",
+    "bin": "~/Library/Python/3.9/bin/whisper",
+    "model": "small",
+    "language": "fr"
+  },
+  "local": {
+    "claude": false,
+    "codex": false
+  }
+}

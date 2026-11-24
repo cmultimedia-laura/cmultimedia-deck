@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CMULTIMEDIA Deck</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Deck">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" sizes="76x76" href="/icon-76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-152.png">
+<link rel="icon" type="image/png" href="/icon-76.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <div id="h-left"><span id="h-menu" class="hbtn">☰ Pages</span><span id="h-title">…</span></div>
+    <div id="h-center"><div id="h-clock">--:--</div><div id="h-eph"></div></div>
+    <div id="h-right"><span id="h-demo" class="badge demo hidden">Démo</span><span id="h-secure" class="badge"></span><span id="h-conn" class="conn">○ Connexion…</span><span id="h-measure" class="measure"></span></div>
+  </div>
+  <div id="alertbar" class="hidden"></div>
+  <div id="page"></div>
+</div>
+<div id="overlay" class="hidden"><div id="ov-box"><div id="ov-head"><span id="ov-title"></span><span id="ov-close" class="hbtn">✕ Fermer</span></div><div id="ov-body"></div></div></div>
+<div id="toast" class="hidden"></div>
+<div id="flash" class="hidden"></div>
+<div id="pair" class="hidden"></div>
+<noscript>JavaScript est nécessaire pour le deck.</noscript>
+<script src="/app.js"></script>
+</body>
+</html>

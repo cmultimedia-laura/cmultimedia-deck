@@ -1,0 +1,366 @@
+{
+  "apps": {
+    "finder": "Finder",
+    "safari": "Safari",
+    "chrome": "Google Chrome",
+    "keynote": "Keynote",
+    "notes": "Notes",
+    "calendrier": "Calendar",
+    "terminal": "Terminal",
+    "musique": "Music"
+  },
+  "folders": {
+    "telechargements": "~/Downloads",
+    "documents": "~/Documents",
+    "bureau": "~/Desktop"
+  },
+  "actions": [
+    {
+      "id": "go-accueil",
+      "label": "Accueil",
+      "type": "page",
+      "params": {
+        "page": "accueil"
+      }
+    },
+    {
+      "id": "go-studio",
+      "label": "Studio",
+      "type": "page",
+      "params": {
+        "page": "studio"
+      }
+    },
+    {
+      "id": "go-surveillance",
+      "label": "Surveillance",
+      "type": "page",
+      "params": {
+        "page": "surveillance"
+      }
+    },
+    {
+      "id": "go-performances",
+      "label": "Performances",
+      "type": "page",
+      "params": {
+        "page": "performances"
+      }
+    },
+    {
+      "id": "ouvrir-finder",
+      "label": "Finder",
+      "type": "open_app",
+      "params": {
+        "app": "finder"
+      }
+    },
+    {
+      "id": "ouvrir-telechargements",
+      "label": "Téléchargements",
+      "type": "open_folder",
+      "params": {
+        "folder": "telechargements"
+      }
+    },
+    {
+      "id": "ouvrir-chrome",
+      "label": "Chrome",
+      "type": "open_app",
+      "params": {
+        "app": "chrome"
+      }
+    },
+    {
+      "id": "ouvrir-notes",
+      "label": "Notes",
+      "type": "open_app",
+      "params": {
+        "app": "notes"
+      }
+    },
+    {
+      "id": "ouvrir-calendrier",
+      "label": "Calendrier",
+      "type": "open_app",
+      "params": {
+        "app": "calendrier"
+      }
+    },
+    {
+      "id": "ouvrir-terminal",
+      "label": "Terminal",
+      "type": "open_app",
+      "params": {
+        "app": "terminal"
+      }
+    },
+    {
+      "id": "volume-plus",
+      "label": "Volume +",
+      "type": "volume",
+      "params": {
+        "op": "up"
+      }
+    },
+    {
+      "id": "volume-moins",
+      "label": "Volume −",
+      "type": "volume",
+      "params": {
+        "op": "down"
+      }
+    },
+    {
+      "id": "volume-couper",
+      "label": "Couper le son",
+      "type": "volume",
+      "params": {
+        "op": "mute"
+      }
+    },
+    {
+      "id": "volume-retablir",
+      "label": "Rétablir le son",
+      "type": "volume",
+      "params": {
+        "op": "unmute"
+      }
+    },
+    {
+      "id": "keynote-ouvrir",
+      "label": "Ouvrir Keynote",
+      "type": "open_app",
+      "params": {
+        "app": "keynote"
+      }
+    },
+    {
+      "id": "keynote-precedente",
+      "label": "◀ Diapo précédente",
+      "type": "keynote",
+      "params": {
+        "op": "previous"
+      }
+    },
+    {
+      "id": "keynote-suivante",
+      "label": "Diapo suivante ▶",
+      "type": "keynote",
+      "params": {
+        "op": "next"
+      }
+    },
+    {
+      "id": "keynote-lancer",
+      "label": "Lancer le diaporama",
+      "type": "keynote",
+      "params": {
+        "op": "play"
+      }
+    },
+    {
+      "id": "arreter-captures",
+      "label": "Arrêter toutes les captures",
+      "type": "media_stop",
+      "params": {}
+    },
+    {
+      "id": "demarrer-journee",
+      "label": "Démarrer ma journée",
+      "type": "sequence",
+      "params": {
+        "steps": [
+          "ouvrir-documents",
+          "ouvrir-safari",
+          "go-accueil"
+        ]
+      }
+    },
+    {
+      "id": "musique-lecture",
+      "label": "Lecture / pause",
+      "type": "music",
+      "params": {
+        "op": "playpause"
+      }
+    },
+    {
+      "id": "musique-suivant",
+      "label": "Morceau suivant",
+      "type": "music",
+      "params": {
+        "op": "next"
+      }
+    },
+    {
+      "id": "musique-precedent",
+      "label": "Morceau précédent",
+      "type": "music",
+      "params": {
+        "op": "previous"
+      }
+    },
+    {
+      "id": "musique-plus",
+      "label": "Musique +",
+      "type": "music",
+      "params": {
+        "op": "louder"
+      }
+    },
+    {
+      "id": "musique-moins",
+      "label": "Musique −",
+      "type": "music",
+      "params": {
+        "op": "quieter"
+      }
+    },
+    {
+      "id": "ouvrir-musique",
+      "label": "Ouvrir Musique",
+      "type": "open_app",
+      "params": {
+        "app": "musique"
+      }
+    },
+    {
+      "id": "go-musique",
+      "label": "Musique",
+      "type": "page",
+      "params": {
+        "page": "musique"
+      }
+    },
+    {
+      "id": "go-apps",
+      "label": "Applications",
+      "type": "page",
+      "params": {
+        "page": "applications"
+      }
+    },
+    {
+      "id": "go-trackpad",
+      "label": "Trackpad",
+      "type": "page",
+      "params": {
+        "page": "trackpad"
+      }
+    },
+    {
+      "id": "go-clavier",
+      "label": "Clavier",
+      "type": "page",
+      "params": {
+        "page": "clavier"
+      }
+    },
+    {
+      "id": "go-outils",
+      "label": "Outils",
+      "type": "page",
+      "params": {
+        "page": "outils"
+      }
+    },
+    {
+      "id": "go-emoji",
+      "label": "Emoji",
+      "type": "page",
+      "params": {
+        "page": "clavier",
+        "kbTab": 3
+      }
+    },
+    {
+      "id": "go-mac",
+      "label": "Commandes du Mac",
+      "type": "page",
+      "params": {
+        "page": "mac"
+      }
+    },
+    {
+      "id": "ouvrir-documents",
+      "type": "open_folder",
+      "label": "Documents",
+      "params": {
+        "folder": "documents"
+      }
+    },
+    {
+      "id": "ouvrir-bureau",
+      "type": "open_folder",
+      "label": "Bureau",
+      "params": {
+        "folder": "bureau"
+      }
+    },
+    {
+      "id": "ouvrir-safari",
+      "type": "open_app",
+      "label": "Safari",
+      "params": {
+        "app": "safari"
+      }
+    },
+    {
+      "id": "web-wikipedia",
+      "type": "open_url",
+      "label": "Wikipédia",
+      "params": {
+        "url": "https://fr.wikipedia.org/"
+      }
+    },
+    {
+      "id": "web-carte",
+      "type": "open_url",
+      "label": "OpenStreetMap",
+      "params": {
+        "url": "https://www.openstreetmap.org/"
+      }
+    },
+    {
+      "id": "web-meteo",
+      "type": "open_url",
+      "label": "Météo",
+      "params": {
+        "url": "https://www.meteofrance.com/"
+      }
+    },
+    {
+      "id": "web-recherche",
+      "type": "open_url",
+      "label": "DuckDuckGo",
+      "params": {
+        "url": "https://duckduckgo.com/"
+      }
+    },
+    {
+      "id": "web-site",
+      "type": "open_url",
+      "label": "Mon site (exemple)",
+      "params": {
+        "url": "https://example.com/"
+      }
+    },
+    {
+      "id": "ipad-wikipedia",
+      "type": "ipad_url",
+      "label": "Wikipédia sur la tablette",
+      "params": {
+        "url": "https://fr.wikipedia.org/"
+      }
+    },
+    {
+      "id": "ipad-carte",
+      "type": "ipad_url",
+      "label": "OpenStreetMap sur la tablette",
+      "params": {
+        "url": "https://www.openstreetmap.org/"
+      }
+    }
+  ]
+}

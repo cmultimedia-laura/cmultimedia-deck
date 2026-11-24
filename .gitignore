@@ -1,0 +1,6 @@
+# Données propres à chaque Mac : clés, jetons, tablettes associées, certificats, journaux
+data/
+# Configuration réelle (créée par install.sh à partir de config.example/)
+config/
+deck-matin.command
+.DS_Store

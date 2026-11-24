@@ -1,0 +1,856 @@
+{
+  "home": "accueil",
+  "pages": [
+    {
+      "id": "accueil",
+      "title": "Accueil",
+      "widgets": [
+        {
+          "id": "tuile-systemes",
+          "type": "systems",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Mes sites"
+        },
+        {
+          "id": "cpu",
+          "type": "chart",
+          "x": 3,
+          "y": 0,
+          "w": 6,
+          "h": 2,
+          "label": "Processeur du Mac",
+          "source": "cpu",
+          "unit": "%",
+          "params": {
+            "max": 100,
+            "window": 15
+          },
+          "thresholds": {
+            "warn": 70,
+            "crit": 90
+          },
+          "action": "go-performances"
+        },
+        {
+          "id": "memoire",
+          "type": "gauge",
+          "x": 9,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Mémoire utilisée",
+          "source": "mem",
+          "unit": "Go",
+          "thresholds": {
+            "warn": 80,
+            "crit": 92
+          },
+          "action": "go-performances"
+        },
+        {
+          "id": "mini-musique",
+          "type": "music",
+          "x": 0,
+          "y": 2,
+          "w": 8,
+          "h": 2,
+          "label": "Musique",
+          "params": {
+            "compact": true
+          },
+          "action": "go-musique"
+        },
+        {
+          "id": "volume",
+          "type": "gauge",
+          "x": 8,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "label": "Volume du Mac",
+          "source": "volume",
+          "unit": "%",
+          "action": "go-mac"
+        },
+        {
+          "id": "k1",
+          "type": "button",
+          "x": 0,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Trackpad",
+          "icon": "🖱",
+          "action": "go-trackpad"
+        },
+        {
+          "id": "k2",
+          "type": "button",
+          "x": 2,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Clavier",
+          "icon": "⌨️",
+          "action": "go-clavier"
+        },
+        {
+          "id": "k3",
+          "type": "button",
+          "x": 4,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Emojis",
+          "icon": "😀",
+          "action": "go-emoji"
+        },
+        {
+          "id": "k4",
+          "type": "button",
+          "x": 6,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Applications",
+          "icon": "🗂",
+          "action": "go-apps"
+        },
+        {
+          "id": "k5",
+          "type": "button",
+          "x": 8,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Musique",
+          "icon": "🎵",
+          "action": "go-musique"
+        },
+        {
+          "id": "k6",
+          "type": "button",
+          "x": 10,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "label": "Outils",
+          "icon": "🧰",
+          "action": "go-outils"
+        },
+        {
+          "id": "k7",
+          "type": "button",
+          "x": 0,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Surveillance",
+          "icon": "📡",
+          "action": "go-surveillance"
+        },
+        {
+          "id": "k8",
+          "type": "button",
+          "x": 2,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Performances",
+          "icon": "📈",
+          "action": "go-performances"
+        },
+        {
+          "id": "k9",
+          "type": "button",
+          "x": 4,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Studio",
+          "icon": "🎙",
+          "action": "go-studio"
+        },
+        {
+          "id": "k10",
+          "type": "button",
+          "x": 6,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Mac",
+          "icon": "💻",
+          "action": "go-mac"
+        },
+        {
+          "id": "k11",
+          "type": "button",
+          "x": 8,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Ma journée",
+          "icon": "☀️",
+          "action": "demarrer-journee"
+        },
+        {
+          "id": "k12",
+          "type": "button",
+          "x": 10,
+          "y": 6,
+          "w": 2,
+          "h": 2,
+          "label": "Stop captures",
+          "icon": "■",
+          "action": "arreter-captures"
+        }
+      ]
+    },
+    {
+      "id": "outils",
+      "title": "Outils",
+      "widgets": [
+        {
+          "id": "o1",
+          "type": "button",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 4,
+          "label": "Trackpad",
+          "icon": "🖱",
+          "action": "go-trackpad"
+        },
+        {
+          "id": "o2",
+          "type": "button",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 4,
+          "label": "Clavier",
+          "icon": "⌨️",
+          "action": "go-clavier"
+        },
+        {
+          "id": "o3",
+          "type": "button",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 4,
+          "label": "Emoji",
+          "icon": "😀",
+          "action": "go-emoji"
+        },
+        {
+          "id": "o4",
+          "type": "button",
+          "x": 9,
+          "y": 0,
+          "w": 3,
+          "h": 4,
+          "label": "Applications",
+          "icon": "🧩",
+          "action": "go-apps"
+        },
+        {
+          "id": "o5",
+          "type": "button",
+          "x": 0,
+          "y": 4,
+          "w": 3,
+          "h": 4,
+          "label": "Musique",
+          "icon": "🎵",
+          "action": "go-musique"
+        },
+        {
+          "id": "o6",
+          "type": "button",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "h": 4,
+          "label": "Commandes du Mac",
+          "icon": "💻",
+          "action": "go-mac"
+        },
+        {
+          "id": "o7",
+          "type": "button",
+          "x": 6,
+          "y": 4,
+          "w": 3,
+          "h": 4,
+          "label": "Performances",
+          "icon": "📈",
+          "action": "go-performances"
+        },
+        {
+          "id": "o8",
+          "type": "button",
+          "x": 9,
+          "y": 4,
+          "w": 3,
+          "h": 4,
+          "label": "Studio",
+          "icon": "🎙",
+          "action": "go-studio"
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Applications",
+      "widgets": [
+        {
+          "id": "apps-dock",
+          "type": "apps",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8,
+          "label": "Applications du Dock (toucher = ouvrir sur le Mac)"
+        }
+      ]
+    },
+    {
+      "id": "trackpad",
+      "title": "Trackpad",
+      "widgets": [
+        {
+          "id": "tp",
+          "type": "trackpad",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8,
+          "label": "Trackpad du Mac"
+        }
+      ]
+    },
+    {
+      "id": "clavier",
+      "title": "Clavier",
+      "widgets": [
+        {
+          "id": "kbd",
+          "type": "keyboard",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8,
+          "label": "Clavier du Mac"
+        }
+      ]
+    },
+    {
+      "id": "musique",
+      "title": "Musique",
+      "widgets": [
+        {
+          "id": "mus-lecteur",
+          "type": "music",
+          "x": 0,
+          "y": 0,
+          "w": 7,
+          "h": 8,
+          "label": "En cours sur le Mac",
+          "params": {
+            "full": true
+          }
+        },
+        {
+          "id": "mus-playlists",
+          "type": "playlists",
+          "x": 7,
+          "y": 0,
+          "w": 5,
+          "h": 8,
+          "label": "Mes playlists"
+        }
+      ]
+    },
+    {
+      "id": "performances",
+      "title": "Performances",
+      "widgets": [
+        {
+          "id": "cpu-grand",
+          "type": "chart",
+          "x": 0,
+          "y": 0,
+          "w": 8,
+          "h": 4,
+          "label": "Processeur",
+          "source": "cpu",
+          "unit": "%",
+          "params": {
+            "max": 100,
+            "window": 15
+          },
+          "thresholds": {
+            "warn": 70,
+            "crit": 90
+          }
+        },
+        {
+          "id": "procs",
+          "type": "procs",
+          "x": 8,
+          "y": 0,
+          "w": 4,
+          "h": 4,
+          "label": "Programmes les plus gourmands"
+        },
+        {
+          "id": "mem-courbe",
+          "type": "chart",
+          "x": 0,
+          "y": 4,
+          "w": 5,
+          "h": 4,
+          "label": "Mémoire utilisée",
+          "source": "mem",
+          "unit": "Go",
+          "params": {
+            "window": 15
+          }
+        },
+        {
+          "id": "disque",
+          "type": "gauge",
+          "x": 5,
+          "y": 4,
+          "w": 3,
+          "h": 4,
+          "label": "Disque utilisé",
+          "source": "disk",
+          "unit": "Go",
+          "thresholds": {
+            "warn": 85,
+            "crit": 95
+          }
+        },
+        {
+          "id": "sysinfo",
+          "type": "sysinfo",
+          "x": 8,
+          "y": 4,
+          "w": 4,
+          "h": 4,
+          "label": "Disques, réseau, batterie"
+        }
+      ]
+    },
+    {
+      "id": "surveillance",
+      "title": "Surveillance",
+      "widgets": [
+        {
+          "id": "s-ok",
+          "type": "counter",
+          "x": 0,
+          "y": 0,
+          "w": 4,
+          "h": 1,
+          "label": "Disponibles",
+          "source": "svc.count.ok",
+          "color": "#2ecc71",
+          "params": {
+            "filter": "ok"
+          }
+        },
+        {
+          "id": "s-alerte",
+          "type": "counter",
+          "x": 4,
+          "y": 0,
+          "w": 4,
+          "h": 1,
+          "label": "En alerte",
+          "source": "svc.count.alert",
+          "color": "#ff4f9a",
+          "params": {
+            "filter": "alert"
+          }
+        },
+        {
+          "id": "s-inconnu",
+          "type": "counter",
+          "x": 8,
+          "y": 0,
+          "w": 4,
+          "h": 1,
+          "label": "Inconnus",
+          "source": "svc.count.unknown",
+          "color": "#8a9bb8",
+          "params": {
+            "filter": "unknown"
+          }
+        },
+        {
+          "id": "services",
+          "type": "services",
+          "x": 0,
+          "y": 1,
+          "w": 12,
+          "h": 7,
+          "label": "Mes sites",
+          "unit": "ms"
+        }
+      ]
+    },
+    {
+      "id": "studio",
+      "title": "Studio",
+      "widgets": [
+        {
+          "id": "ipad-capture",
+          "type": "ipadcapture",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 5,
+          "label": "Sources de la tablette"
+        },
+        {
+          "id": "enregistrements",
+          "type": "recordings",
+          "x": 0,
+          "y": 5,
+          "w": 6,
+          "h": 3,
+          "label": "Captures conservées sur le Mac"
+        },
+        {
+          "id": "mac-micro",
+          "type": "vumeter",
+          "x": 6,
+          "y": 0,
+          "w": 6,
+          "h": 4,
+          "label": "Micro du Mac (facultatif)",
+          "source": "mic.level"
+        },
+        {
+          "id": "mac-camera",
+          "type": "camera",
+          "x": 6,
+          "y": 4,
+          "w": 6,
+          "h": 4,
+          "label": "Caméra du Mac (facultative)"
+        }
+      ]
+    },
+    {
+      "id": "mac",
+      "title": "Mac",
+      "widgets": [
+        {
+          "id": "m-finder",
+          "type": "button",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Finder",
+          "action": "ouvrir-finder"
+        },
+        {
+          "id": "m-telech",
+          "type": "button",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Téléchargements",
+          "action": "ouvrir-telechargements"
+        },
+        {
+          "id": "m-travail",
+          "type": "button",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Documents",
+          "action": "ouvrir-documents"
+        },
+        {
+          "id": "m-projet",
+          "type": "button",
+          "x": 9,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "label": "Bureau",
+          "action": "ouvrir-bureau"
+        },
+        {
+          "id": "m-chrome",
+          "type": "button",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "label": "Chrome",
+          "action": "ouvrir-chrome"
+        },
+        {
+          "id": "m-notes",
+          "type": "button",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "label": "Notes",
+          "action": "ouvrir-notes"
+        },
+        {
+          "id": "m-cal",
+          "type": "button",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "label": "Calendrier",
+          "action": "ouvrir-calendrier"
+        },
+        {
+          "id": "m-term",
+          "type": "button",
+          "x": 9,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "label": "Terminal",
+          "action": "ouvrir-terminal"
+        },
+        {
+          "id": "m-volume",
+          "type": "gauge",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "h": 4,
+          "label": "Volume de sortie",
+          "source": "volume",
+          "unit": "%"
+        },
+        {
+          "id": "m-vmoins",
+          "type": "button",
+          "x": 4,
+          "y": 4,
+          "w": 4,
+          "h": 2,
+          "label": "Volume −",
+          "action": "volume-moins"
+        },
+        {
+          "id": "m-vplus",
+          "type": "button",
+          "x": 8,
+          "y": 4,
+          "w": 4,
+          "h": 2,
+          "label": "Volume +",
+          "action": "volume-plus"
+        },
+        {
+          "id": "m-couper",
+          "type": "button",
+          "x": 4,
+          "y": 6,
+          "w": 4,
+          "h": 2,
+          "label": "Couper le son",
+          "action": "volume-couper"
+        },
+        {
+          "id": "m-retablir",
+          "type": "button",
+          "x": 8,
+          "y": 6,
+          "w": 4,
+          "h": 2,
+          "label": "Rétablir le son",
+          "action": "volume-retablir"
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "title": "Web",
+      "widgets": [
+        {
+          "id": "t-mac",
+          "type": "text",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 1,
+          "label": "Ouvrir sur le Mac"
+        },
+        {
+          "id": "w-wiki",
+          "type": "button",
+          "x": 0,
+          "y": 1,
+          "w": 3,
+          "h": 2,
+          "label": "Wikipédia",
+          "action": "web-wikipedia"
+        },
+        {
+          "id": "w-carte",
+          "type": "button",
+          "x": 3,
+          "y": 1,
+          "w": 3,
+          "h": 2,
+          "label": "OpenStreetMap",
+          "action": "web-carte"
+        },
+        {
+          "id": "w-meteo",
+          "type": "button",
+          "x": 6,
+          "y": 1,
+          "w": 3,
+          "h": 2,
+          "label": "Météo",
+          "action": "web-meteo"
+        },
+        {
+          "id": "w-recherche",
+          "type": "button",
+          "x": 9,
+          "y": 1,
+          "w": 3,
+          "h": 2,
+          "label": "DuckDuckGo",
+          "action": "web-recherche"
+        },
+        {
+          "id": "w-site",
+          "type": "button",
+          "x": 0,
+          "y": 3,
+          "w": 3,
+          "h": 2,
+          "label": "Mon site (exemple)",
+          "action": "web-site"
+        },
+        {
+          "id": "t-ipad",
+          "type": "text",
+          "x": 0,
+          "y": 5,
+          "w": 12,
+          "h": 1,
+          "label": "Ouvrir sur la tablette"
+        },
+        {
+          "id": "w-ipad-wiki",
+          "type": "button",
+          "x": 0,
+          "y": 6,
+          "w": 4,
+          "h": 2,
+          "label": "Wikipédia sur la tablette",
+          "action": "ipad-wikipedia"
+        },
+        {
+          "id": "w-ipad-carte",
+          "type": "button",
+          "x": 4,
+          "y": 6,
+          "w": 4,
+          "h": 2,
+          "label": "OpenStreetMap sur la tablette",
+          "action": "ipad-carte"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "title": "Présentation",
+      "widgets": [
+        {
+          "id": "p-keynote",
+          "type": "button",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 3,
+          "label": "Ouvrir Keynote",
+          "action": "keynote-ouvrir"
+        },
+        {
+          "id": "p-prec",
+          "type": "button",
+          "x": 0,
+          "y": 3,
+          "w": 4,
+          "h": 5,
+          "label": "◀ Précédente",
+          "action": "keynote-precedente"
+        },
+        {
+          "id": "p-lancer",
+          "type": "button",
+          "x": 4,
+          "y": 3,
+          "w": 4,
+          "h": 5,
+          "label": "Lancer le diaporama",
+          "action": "keynote-lancer"
+        },
+        {
+          "id": "p-suiv",
+          "type": "button",
+          "x": 8,
+          "y": 3,
+          "w": 4,
+          "h": 5,
+          "label": "Suivante ▶",
+          "action": "keynote-suivante"
+        }
+      ]
+    },
+    {
+      "id": "commandes",
+      "title": "Mes commandes",
+      "widgets": [
+        {
+          "id": "c-journee",
+          "type": "button",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 3,
+          "label": "Démarrer ma journée",
+          "action": "demarrer-journee"
+        },
+        {
+          "id": "c-stop",
+          "type": "button",
+          "x": 6,
+          "y": 0,
+          "w": 6,
+          "h": 3,
+          "label": "Arrêter toutes les captures",
+          "action": "arreter-captures",
+          "color": "#ff4f9a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Éditeur — CMULTIMEDIA Deck</title>
+<link rel="icon" href="/icon-76.png">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<header>
+  <h1>CMULTIMEDIA Deck <small>éditeur (Mac uniquement)</small></h1>
+  <div id="status"></div>
+</header>
+<nav>
+  <button data-tab="pages" class="on">Pages et widgets</button>
+  <button data-tab="actions">Actions</button>
+  <button data-tab="connectors">Connecteurs et réglages</button>
+  <button data-tab="devices">Appareils</button>
+  <button data-tab="backup">Import, export, sauvegardes</button>
+  <span class="grow"></span>
+  <span id="dirty"></span>
+  <button id="validate">Valider</button>
+  <button id="save" class="primary">Enregistrer (iPad mis à jour)</button>
+</nav>
+<div id="errors"></div>
+<main>
+  <section id="tab-pages" class="tab on">
+    <div class="cols3">
+      <div class="col">
+        <h2>Pages</h2>
+        <ul id="pages"></ul>
+        <div class="row"><button id="p-add">+ Page</button><button id="p-dup">Dupliquer</button><button id="p-del" class="danger">Supprimer</button></div>
+        <div class="row"><button id="p-up">▲</button><button id="p-down">▼</button><button id="p-home">Définir comme accueil</button></div>
+        <label>Titre de la page <input id="p-title"></label>
+        <p class="hint">L'identifiant d'une page est stable (utilisé par ./deck show). Le titre est libre.</p>
+      </div>
+      <div class="col wide">
+        <h2>Disposition <small>grille 12 × 8 — cliquer un widget pour le modifier, glisser pour le déplacer</small></h2>
+        <div id="grid"></div>
+        <div class="row"><select id="w-type"></select><button id="w-add">+ Widget</button><button id="w-dup">Dupliquer</button><button id="w-del" class="danger">Supprimer</button></div>
+      </div>
+      <div class="col">
+        <h2>Widget</h2>
+        <div id="props"><p class="hint">Aucun widget sélectionné.</p></div>
+      </div>
+    </div>
+    <h2>Aperçu au format iPad <select id="pv-size"><option value="672">Safari avec barres (1024 × 672)</option><option value="748">Icône d'écran d'accueil (1024 × 748)</option></select> <button id="pv-reload">Recharger l'aperçu</button></h2>
+    <p class="hint">L'aperçu affiche la configuration ENREGISTRÉE (enregistre pour voir tes changements).</p>
+    <div id="pv-wrap"><iframe id="pv" src="about:blank"></iframe></div>
+  </section>
+
+  <section id="tab-actions" class="tab">
+    <h2>Catalogue d'actions <small>les touches de l'iPad n'appellent que ces actions nommées</small></h2>
+    <table id="actions"><thead><tr><th>Identifiant</th><th>Libellé</th><th>Type</th><th>Paramètres (JSON)</th><th></th></tr></thead><tbody></tbody></table>
+    <div class="row"><button id="a-add">+ Action</button></div>
+    <h3>Applications autorisées <small>(identifiant → nom exact de l'application)</small></h3>
+    <textarea id="apps" rows="6"></textarea>
+    <h3>Dossiers autorisés <small>(identifiant → chemin sous le dossier personnel)</small></h3>
+    <textarea id="folders" rows="6"></textarea>
+  </section>
+
+  <section id="tab-connectors" class="tab">
+    <h2>Réglages <small>settings.json</small></h2>
+    <textarea id="settings" rows="16"></textarea>
+    <h2>Connecteurs <small>connectors.json — surveillance des sites, météo, transcription</small></h2>
+    <textarea id="connectors" rows="30"></textarea>
+    <p class="hint">Les secrets ne sont jamais stockés ici : seul le chemin du fichier jeton (déjà présent sur le Mac) est indiqué.</p>
+  </section>
+
+  <section id="tab-devices" class="tab">
+    <h2>Association</h2>
+    <div id="pairing"></div>
+    <h2>Appareils associés</h2>
+    <table id="devices"><thead><tr><th>Appareil</th><th>Identifiant</th><th>Associé le</th><th>Dernier contact</th><th>Page</th><th>Chiffré</th><th></th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <section id="tab-backup" class="tab">
+    <h2>Export / import JSON</h2>
+    <div class="row"><button id="export">Exporter la configuration</button><label class="file">Importer un fichier JSON <input type="file" id="import" accept="application/json,.json"></label></div>
+    <p class="hint">L'import charge le fichier dans l'éditeur ; rien n'est enregistré avant « Valider » puis « Enregistrer ».</p>
+    <h2>Sauvegardes automatiques <small>une sauvegarde par enregistrement, 30 conservées</small></h2>
+    <ul id="backups"></ul>
+  </section>
+</main>
+<script src="/admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+#!/bin/bash
+# CMULTIMEDIA Deck : pilotage depuis le terminal, Claude Code ou Codex. ./deck help
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NODE="$(command -v node || echo /opt/homebrew/bin/node)"
+exec "$NODE" "$DIR/cli.js" "$@"

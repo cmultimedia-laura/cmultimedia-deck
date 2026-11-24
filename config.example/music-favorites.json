@@ -1,0 +1,11 @@
+{
+  "favorites": [
+    {
+      "id": "exemple-artiste",
+      "label": "⭐ Mon artiste",
+      "kind": "artist",
+      "artist": "Nom de l'artiste"
+    }
+  ],
+  "aide": "kind : station ou playlist (url https://music.apple.com/...), artist (nom exact dans la bibliothèque Musique)"
+}
