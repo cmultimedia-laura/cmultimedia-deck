@@ -17,6 +17,7 @@ const actions = require('./lib/actions');
 const media = require('./lib/media');
 const transcribe = require('./lib/transcribe');
 const tls = require('./lib/tls');
+const alias = require('./lib/alias');
 const extras = require('./lib/extras');
 const alerts = require('./lib/alerts');
 const sysinfo = require('./lib/sysinfo');
@@ -110,6 +111,8 @@ function sameOrigin(req) {
 function hostAllowed(req) {
   const h = hostOf(req.headers.host);
   if (h === '127.0.0.1' || h === 'localhost' || h === (U.localHostName() + '.local').toLowerCase()) return true;
+  const al = config.get().settings.alias;
+  if (al && h === al + '.local') return true;
   return U.lanAddresses().some(function (a) { return a.address === h; });
 }
 function clientIp(req) { return String(req.socket.remoteAddress || '').replace(/^::ffff:/, ''); }
@@ -469,7 +472,7 @@ function addButton(b) {
 function adminStatus() {
   const st = config.get().settings;
   const lan = U.lanAddresses();
-  const host = U.localHostName() + '.local';
+  const host = st.alias ? st.alias + '.local' : U.localHostName() + '.local';
   return {
     ok: true, version: VERSION, pid: process.pid, startedAt: STARTED, demo: st.demo,
     urls: {
@@ -541,9 +544,20 @@ function main() {
   const st = S();
   http.createServer(router(false)).listen(st.portHttp, '0.0.0.0', function () { U.log('info', 'HTTP à l\'écoute sur le port ' + st.portHttp); });
   try {
-    tlsInfo = tls.ensure();
+    tlsInfo = tls.ensure(st.alias);
+    alias.sync(st.alias, st.portHttps);
     if (tlsInfo.ok) {
-      https.createServer({ key: tlsInfo.key, cert: tlsInfo.cert, minVersion: 'TLSv1.2' }, router(true)).listen(st.portHttps, '0.0.0.0', function () { U.log('info', 'HTTPS à l\'écoute sur le port ' + st.portHttps); });
+      const httpsSrv = https.createServer({ key: tlsInfo.key, cert: tlsInfo.cert, minVersion: 'TLSv1.2' }, router(true));
+      httpsSrv.listen(st.portHttps, '0.0.0.0', function () { U.log('info', 'HTTPS à l\'écoute sur le port ' + st.portHttps); });
+      // Connexion universelle : si le Mac change de réseau ou d'adresse, le certificat est refait à chaud
+      // (nouvelles IP couvertes) sans redémarrer ; le nom .local, lui, reste valable partout.
+      setInterval(function () {
+        try {
+          alias.sync(S().alias, S().portHttps);
+          const t = tls.ensure(S().alias);
+          if (t.ok && t.regenerated) { httpsSrv.setSecureContext({ key: t.key, cert: t.cert, minVersion: 'TLSv1.2' }); tlsInfo = t; U.log('info', 'adresse du Mac changée : certificat rechargé à chaud', { ips: t.names.ips }); }
+        } catch (e) { U.log('error', 'rechargement du certificat impossible', { e: e.message }); }
+      }, 30000).unref();
     }
   } catch (e) { tlsInfo = { ok: false, error: e.message }; U.log('error', 'HTTPS indisponible', { e: e.message }); }
 
@@ -556,7 +570,7 @@ function main() {
 
   const shutdown = function (sig) {
     U.log('info', 'arrêt du serveur (' + sig + '), libération des périphériques');
-    media.stopAll('arrêt du serveur'); mouse.stop(); spectrum.stop();
+    media.stopAll('arrêt du serveur'); mouse.stop(); spectrum.stop(); alias.stop();
     metrics.persist();
     setTimeout(function () { process.exit(0); }, 1200);
   };

@@ -448,6 +448,21 @@
       ]
     },
     {
+      "id": "alertes",
+      "title": "Alertes",
+      "widgets": [
+        {
+          "id": "alertes",
+          "type": "alertes",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8,
+          "label": "Alertes en cours"
+        }
+      ]
+    },
+    {
       "id": "surveillance",
       "title": "Surveillance",
       "widgets": [

@@ -52,6 +52,15 @@ Sur la tablette :
 2. Comparez l'empreinte du certificat installé avec celle affichée par `./deck url`.
 3. Ouvrez l'adresse `https://…:8711/`, ajoutez-la à l'écran d'accueil, ouvrez le Deck depuis l'icône et tapez le code.
 
+**Un nom simple qui marche sur tous les réseaux.** Choisissez un nom dans `config/settings.json`
+(`"alias": "mon-deck"`, minuscules, chiffres et tirets), puis redémarrez le Deck : la tablette ouvre alors
+`https://mon-deck.local:8711/`, au bureau comme à la maison. Le Deck annonce ce nom lui-même sur le réseau,
+sans toucher aux réglages du Mac, et refait son certificat tout seul quand l'adresse du Mac change.
+Sous iOS, Safari et l'icône d'écran d'accueil ont chacun leur association : tapez le code depuis l'icône.
+
+**Le son des alertes** (bips quand un site tombe ou que le disque se remplit) est activé par défaut. Sous iOS 9,
+Safari ne l'autorise qu'après un premier toucher de l'écran. Test et réglage : page Alertes ou ☰ Pages.
+
 Sur le Mac, dans Réglages Système › Confidentialité et sécurité, autorisez Terminal dans « Accessibilité »
 (trackpad, clavier) et « Enregistrement de l'écran et de l'audio du système » (animation musicale :
 24 niveaux sonores calculés, rien n'est enregistré). `./deck doctor` indique ce qui manque.

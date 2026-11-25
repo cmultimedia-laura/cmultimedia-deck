@@ -16,7 +16,7 @@ const WIDGET_HELP = {
   gauge: 'Jauge animée (mem, disk, volume, cpu)', chart: 'Courbe temporelle (cpu, mem, disk, svc:<id>)', vumeter: 'Vumètre + commandes du micro du Mac',
   camera: 'Aperçu / photo / clip de la caméra du Mac', services: 'Liste des services surveillés avec latence',
   media: 'Zone des captures actives + arrêt', ipadcapture: 'Captures avec l\'appareil photo de l\'iPad', recordings: 'Liste des captures conservées', text: 'Titre de section',
-  music: 'Musique du Mac (titre, lecture, suivant)', claude: 'Sessions Claude Code actives'
+  music: 'Musique du Mac (titre, lecture, suivant)', claude: 'Sessions Claude Code actives', alertes: 'Alertes : en cours, son'
 };
 
 function markDirty() { $('#dirty').textContent = JSON.stringify(draft) === JSON.stringify(saved) ? '' : '● Modifications non enregistrées'; }

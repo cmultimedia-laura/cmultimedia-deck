@@ -329,7 +329,8 @@
         if (r.client.page) go(r.client.page);
         if (r.client.openUrl) openOutside(r.client.openUrl);
       }
-      if (r.message) toast(r.message, 'ok');
+      // Volume : pas de message (il couvrait les boutons de la page Musique), la valeur s'affiche déjà entre − et +
+      if (r.message && !/^volume-/.test(id)) toast(r.message, 'ok');
     }, { timeout: 30000 });
   }
   // Lien externe : ouvert dans Safari (window.open), jamais dans l'icône du deck, qui resterait sinon bloquée sur le site.
@@ -357,12 +358,13 @@
         button(anim, m[1], m[0] === animMode ? 'sel' : '', function () { store('deckAnim', m[0]); applySettings(); go(currentPage, true); });
       });
       el('h3', null, 'Son des alertes', b);
-      var on = store('alertSound') === '1';
+      var on = soundOn();
       button(b, on ? '🔔 Bip des alertes : activé (toucher pour couper)' : '🔕 Bip des alertes : coupé (toucher pour activer)', on ? 'go' : '', function () {
-        if (store('alertSound') === '1') { store('alertSound', '0'); toast('Bip des alertes coupé', 'ok'); }
+        if (soundOn()) { store('alertSound', '0'); toast('Bip des alertes coupé', 'ok'); }
         else { unlockAudio(); store('alertSound', audioCtx ? '1' : '0'); toast(audioCtx ? 'Bip des alertes activé' : 'Son indisponible sur cet iPad', audioCtx ? 'ok' : 'err'); }
         closeOverlay();
       });
+      button(b, '🔊 Tester le son d\'alerte', '', function () { unlockAudio(); if (!audioCtx) { toast('Son indisponible sur cet iPad', 'err'); return; } if (!soundOn()) store('alertSound', '1'); beep('critique'); toast('Pas de son ? Vérifiez le volume et le bouton latéral (silence) de l\'iPad', 'ok'); });
       el('h3', null, 'Cet appareil', b);
       el('div', 'line', 'Connexion : ' + (secure ? 'chiffrée (https)' : 'NON chiffrée (http) — fonctions sensibles bloquées'), b);
       el('div', 'line', 'Mode : ' + (W.navigator.standalone ? 'icône d\'écran d\'accueil' : 'Safari'), b);
@@ -1553,6 +1555,34 @@
 
   // Claude et Codex (usage du jour), façon PhoneBox
   function kfmt(n) { return n >= 1e6 ? num(n / 1e6, 1) + ' M' : n >= 1e3 ? num(n / 1e3, 0) + ' k' : String(n); }
+  // Page Alertes : alertes en cours (J'ai vu), test et réglage du son
+  FACTORIES.alertes = function (box, cfg) {
+    el('div', 'w-title', cfg.label, box);
+    var bar = el('div', null, null, box); bar.style.cssText = 'position:absolute;right:12px;top:6px';
+    button(bar, '🔊 Tester le son', 'small', function () { unlockAudio(); if (!audioCtx) { toast('Son indisponible sur cet iPad', 'err'); return; } if (!soundOn()) store('alertSound', '1'); beep('critique'); });
+    var sb = button(bar, '', 'small', function () { store('alertSound', soundOn() ? '0' : '1'); if (soundOn()) unlockAudio(); paintSound(); });
+    function paintSound() { sb.textContent = soundOn() ? '🔔 Son activé' : '🔕 Son coupé'; }
+    paintSound();
+    var list = el('div', 'list', null, box); list.style.top = '44px';
+    var sig = null;
+    return { update: function (s) {
+      var al = s.alerts || [];
+      var k = JSON.stringify(al.map(function (a) { return a.id + (a.acked ? 1 : 0); }));
+      if (k === sig) return; sig = k; clear(list);
+      var pending = al.filter(function (a) { return !a.acked; });
+      el('div', 'ghead', 'En cours (' + pending.length + ' à voir sur ' + al.length + ')', list);
+      if (!al.length) el('div', 'line t-ok', '✓ Aucune alerte en cours.', list);
+      al.forEach(function (a) {
+        var row = el('div', 'alertrow lv-' + a.level + (a.acked ? ' acked' : ''), null, list);
+        el('div', 'atitle', ({ critique: '🔴 ', attention: '🟠 ', info: '🔵 ' })[a.level] + a.title, row);
+        el('div', 'sub', (a.detail ? a.detail + ' · ' : '') + 'depuis ' + dateFr(a.since) + (a.acked ? ' · vue' : ''), row);
+        if (a.media) button(row, '■ Arrêter cette capture', 'small stop', function () { xhr('POST', '/api/media/stop', { id: a.media }, function () { toast('Capture arrêtée', 'ok'); }); });
+        else if (!a.acked) button(row, 'J\'ai vu', 'small', function () { ackAlert(a.id, function () { row.className += ' acked'; }); });
+      });
+      if (pending.length > 1) button(list, 'Tout marquer comme vu', 'small', function () { ackAlert('*'); });
+    } };
+  };
+
   FACTORIES.ai = function (box, cfg) {
     var t = tile(box, cfg, cfg.label, 'desk');
     return { update: function (s) {
@@ -1575,17 +1605,30 @@
   }
   // Plus de déverrouillage automatique du son à chaque toucher (affichait l'icône de sonnerie d'iOS en boucle sur l'iPad 2).
   // Le bip des alertes s'active une fois, volontairement, dans ☰ Pages.
-  function beep() {
-    if (!audioCtx || store('alertSound') !== '1') return;
+  function soundOn() { return store('alertSound') !== '0'; }   // activé par défaut, coupé seulement à la demande
+  // Safari iOS n'accepte le son qu'après un toucher : un seul déverrouillage par chargement, au premier toucher, puis l'écouteur est retiré.
+  function firstTouchUnlock() { D.body.removeEventListener('touchend', firstTouchUnlock, false); if (soundOn()) unlockAudio(); }
+  D.body.addEventListener('touchend', firstTouchUnlock, false);
+  // critique : 3 bips aigus plus forts ; attention : 2 bips plus doux
+  function beep(level) {
+    if (!audioCtx || !soundOn()) return;
+    var crit = level !== 'attention';
     try {
-      [0, 0.35].forEach(function (d) {
+      if (audioCtx.state === 'suspended' && audioCtx.resume) audioCtx.resume();
+      (crit ? [0, 0.3, 0.6, 1.2, 1.5, 1.8] : [0, 0.4]).forEach(function (d, i) {
         var o = audioCtx.createOscillator(), g = audioCtx.createGain(), t = audioCtx.currentTime + d;
-        o.frequency.value = 880; o.connect(g); g.connect(audioCtx.destination);
-        g.gain.setValueAtTime(0.25, t); g.gain.linearRampToValueAtTime(0, t + 0.25);
-        if (o.start) { o.start(t); o.stop(t + 0.26); } else { o.noteOn(t); o.noteOff(t + 0.26); }
+        o.frequency.value = crit ? (i % 3 === 2 ? 1320 : 990) : 660; o.connect(g); g.connect(audioCtx.destination);
+        g.gain.setValueAtTime(crit ? 0.5 : 0.3, t); g.gain.linearRampToValueAtTime(0, t + 0.24);
+        if (o.start) { o.start(t); o.stop(t + 0.25); } else { o.noteOn(t); o.noteOff(t + 0.25); }
       });
     } catch (e) { /* son indisponible */ }
   }
+  // Rappel sonore toutes les 2 minutes tant qu'une alerte critique n'est pas marquée « J'ai vu ».
+  var lastRemind = 0;
+  setInterval(function () {
+    var l = ((STATE && STATE.alerts) || []).filter(function (a) { return !a.acked && !a.media && a.level === 'critique'; });
+    if (l.length && now() - lastRemind >= 120000) { lastRemind = now(); beep('critique'); }
+  }, 10000);
   function ackAlert(id, cb) { xhr('POST', '/api/alerts/ack', { id: id }, function () { if (cb) cb(); }); }
   function showAlerts() {
     var list = (STATE && STATE.alerts) || [];
@@ -1601,7 +1644,7 @@
       if (list.length) button(b, 'Tout marquer comme vu', 'small', function () { ackAlert('*', closeOverlay); });
     });
   }
-  tap($('alertbar'), showAlerts);
+  tap($('alertbar'), function () { if (pageExists('alertes')) go('alertes'); else showAlerts(); });
   function updateAlerts(s) {
     var list = s.alerts || [], pending = list.filter(function (a) { return !a.acked; });
     var bar = $('alertbar');
@@ -1619,7 +1662,8 @@
       if (fresh.length) {
         var f = $('flash'); f.textContent = fresh[0].title; f.className = 'lv-' + fresh[0].level;
         setTimeout(function () { f.className = 'hidden'; }, animMode === 'desactive' ? 4000 : 6000);
-        if (fresh[0].level === 'critique') beep();
+        var loud = fresh.filter(function (a) { return !a.media; });
+        if (loud.length) { lastRemind = now(); beep(loud.some(function (a) { return a.level === 'critique'; }) ? 'critique' : 'attention'); }
       }
     }
     knownAlerts = {}; list.forEach(function (a) { knownAlerts[a.id] = 1; });
